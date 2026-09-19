@@ -246,4 +246,68 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ---------- Accessibility toolbar ---------- */
+  (function () {
+    var btn = document.querySelector('.a11y-btn');
+    var panel = document.querySelector('.a11y-panel');
+    if (!btn || !panel) return;
+    var root = document.documentElement;
+    var KEYS = ['size', 'contrast', 'links', 'motion'];
+
+    function load() {
+      KEYS.forEach(function (k) {
+        var v = null;
+        try { v = localStorage.getItem('a11y-' + k); } catch (e) { v = null; }
+        if (v) root.setAttribute('data-a11y-' + k, v);
+        syncButtons(k, v);
+      });
+    }
+    function syncButtons(key, value) {
+      panel.querySelectorAll('[data-a11y-key="' + key + '"]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-a11y-value') === value ? 'true' : 'false');
+      });
+    }
+    function set(key, value) {
+      if (value) {
+        root.setAttribute('data-a11y-' + key, value);
+        try { localStorage.setItem('a11y-' + key, value); } catch (e) {}
+      } else {
+        root.removeAttribute('data-a11y-' + key);
+        try { localStorage.removeItem('a11y-' + key); } catch (e) {}
+      }
+      syncButtons(key, value);
+    }
+
+    btn.addEventListener('click', function () {
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    panel.querySelectorAll('[data-a11y-key]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var key = b.getAttribute('data-a11y-key');
+        var value = b.getAttribute('data-a11y-value');
+        var current = root.getAttribute('data-a11y-' + key);
+        set(key, current === value ? null : value);
+      });
+    });
+
+    var reset = panel.querySelector('.a11y-reset');
+    if (reset) {
+      reset.addEventListener('click', function (e) {
+        e.preventDefault();
+        KEYS.forEach(function (k) { set(k, null); });
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!panel.contains(e.target) && !btn.contains(e.target)) {
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    load();
+  })();
+
 });
