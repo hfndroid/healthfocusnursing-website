@@ -201,4 +201,49 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ---------- Enquiry-type router ---------- */
+  var routerBtns = document.querySelectorAll('.router-btn');
+  if (routerBtns.length) {
+    routerBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var role = btn.getAttribute('data-role');
+        routerBtns.forEach(function (b) {
+          b.classList.remove('selected');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('selected');
+        btn.setAttribute('aria-pressed', 'true');
+
+        document.querySelectorAll('.router-panel').forEach(function (p) {
+          p.classList.toggle('active', p.getAttribute('data-role') === role);
+        });
+
+        /* Pre-fill every role field on the page so the visitor never answers twice */
+        document.querySelectorAll('input[name="role"]').forEach(function (input) {
+          input.value = role;
+        });
+        document.querySelectorAll('.role-grid .choice-btn').forEach(function (b) {
+          b.classList.toggle('selected', (b.getAttribute('data-value') || '') === role);
+        });
+        document.querySelectorAll('.multistep-form .form-step[data-step="role"] .choice-btn').forEach(function (b) {
+          if ((b.getAttribute('data-value') || '') === role) { b.click(); }
+        });
+      });
+    });
+  }
+
+  /* ---------- Progressive disclosure for NDIS item codes ---------- */
+  document.querySelectorAll('.code-toggle').forEach(function (btn) {
+    var target = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!target) return;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      target.style.maxHeight = open ? null : target.scrollHeight + 'px';
+      var label = btn.querySelector('.code-toggle-label');
+      if (label) label.textContent = open ? 'View NDIS item numbers' : 'Hide NDIS item numbers';
+    });
+  });
+
 });
