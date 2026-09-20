@@ -778,26 +778,55 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 
 /* ---------- Nav dropdown (Services) ---------- */
 .has-drop{position:relative}
-.drop-toggle{display:inline-flex;align-items:center;gap:6px;font-size:0.9375rem;font-weight:600;color:var(--ink-m);min-height:44px}
-.drop-toggle:hover,.has-drop[aria-expanded="true"] .drop-toggle{color:var(--purple)}
-.drop-toggle svg{width:13px;height:13px;transition:transform .2s ease}
-.has-drop[aria-expanded="true"] .drop-toggle svg{transform:rotate(180deg)}
-.drop-menu{
-  position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(-6px);
-  background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-md);padding:10px;min-width:300px;
-  opacity:0;visibility:hidden;transition:opacity .18s ease,transform .18s ease,visibility .18s;
+.drop-toggle{
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;
+  font-size:0.9375rem;font-weight:600;color:var(--ink-m);
+  transition:color .2s ease;
 }
-.has-drop[aria-expanded="true"] .drop-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-.drop-menu a{display:block;padding:11px 14px;border-radius:var(--radius);font-size:0.9375rem;font-weight:600;color:var(--ink)}
+.drop-toggle svg{width:13px;height:13px;transition:transform .25s ease}
+
+@media (min-width:961px){
+  /* Hover bridge: the menu sits 14px below the trigger, so without this
+     invisible strip the pointer crosses a dead gap and the menu closes. */
+  .has-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+
+  .drop-menu{
+    position:absolute;top:calc(100% + 14px);left:50%;
+    transform:translateX(-50%) translateY(-8px) scale(.98);
+    transform-origin:top center;
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);padding:10px;min-width:310px;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .2s ease,transform .2s cubic-bezier(.22,1,.36,1),visibility .2s;
+  }
+  /* Opens on hover and on keyboard focus, with no JavaScript required */
+  .has-drop:hover .drop-menu,
+  .has-drop:focus-within .drop-menu,
+  .has-drop[aria-expanded="true"] .drop-menu{
+    opacity:1;visibility:visible;pointer-events:auto;
+    transform:translateX(-50%) translateY(0) scale(1);
+  }
+  .has-drop:hover .drop-toggle,
+  .has-drop:focus-within .drop-toggle,
+  .has-drop[aria-expanded="true"] .drop-toggle{color:var(--purple)}
+  .has-drop:hover .drop-toggle svg,
+  .has-drop:focus-within .drop-toggle svg,
+  .has-drop[aria-expanded="true"] .drop-toggle svg{transform:rotate(180deg)}
+}
+
+.drop-menu a{display:block;padding:11px 14px;border-radius:var(--radius);font-size:0.9375rem;font-weight:600;color:var(--ink);transition:background .15s ease,color .15s ease}
 .drop-menu a span{display:block;font-size:0.8125rem;font-weight:500;color:var(--ink-l);margin-top:2px}
 .drop-menu a:hover{background:var(--purple-l);color:var(--purple-d)}
 .drop-menu .divider-line{height:1px;background:var(--border);margin:8px 6px}
+
 @media (max-width:960px){
-  .drop-menu{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;border:none;
-    padding:0 0 0 12px;min-width:0;display:none}
-  .has-drop[aria-expanded="true"] .drop-menu{display:block;transform:none}
-  .drop-menu a{padding:12px 0;border-bottom:1px solid var(--border)}
-  .has-drop{width:100%;border-bottom:1px solid var(--border);padding:6px 0}
-  .drop-toggle{width:100%;justify-content:space-between;padding:8px 0}
+  /* Stacks inline inside the mobile panel, opened by tap */
+  .has-drop{width:100%;border-bottom:1px solid var(--border)}
+  .drop-toggle{width:100%;justify-content:space-between;padding:14px 0;font-size:1.0625rem}
+  .drop-menu{display:none;padding:0 0 10px 12px}
+  .has-drop[aria-expanded="true"] .drop-menu{display:block}
+  .drop-menu a{padding:11px 0;border-bottom:none;font-size:0.9375rem}
+  .drop-menu a:hover{background:none}
+  .drop-menu .divider-line{display:none}
+}
 }
