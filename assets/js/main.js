@@ -310,4 +310,34 @@ document.addEventListener('DOMContentLoaded', function () {
     load();
   })();
 
+  /* ---------- Nav dropdown ---------- */
+  document.querySelectorAll('.has-drop').forEach(function (drop) {
+    var toggle = drop.querySelector('.drop-toggle');
+    if (!toggle) return;
+
+    function setOpen(open) {
+      drop.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(drop.getAttribute('aria-expanded') !== 'true');
+    });
+
+    /* Pointer users get hover on desktop; tap/keyboard still works everywhere */
+    if (window.matchMedia('(min-width: 961px)').matches) {
+      drop.addEventListener('mouseenter', function () { setOpen(true); });
+      drop.addEventListener('mouseleave', function () { setOpen(false); });
+    }
+
+    drop.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { setOpen(false); toggle.focus(); }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!drop.contains(e.target)) setOpen(false);
+    });
+  });
+
 });
