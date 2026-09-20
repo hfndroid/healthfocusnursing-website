@@ -310,7 +310,10 @@ document.addEventListener('DOMContentLoaded', function () {
     load();
   })();
 
-  /* ---------- Nav dropdown ---------- */
+  /* ---------- Nav dropdown ----------
+     Desktop opening is handled entirely in CSS (:hover / :focus-within),
+     so the menu still works if this script fails. JS only adds the
+     tap-to-open behaviour needed on touch screens. */
   document.querySelectorAll('.has-drop').forEach(function (drop) {
     var toggle = drop.querySelector('.drop-toggle');
     if (!toggle) return;
@@ -321,15 +324,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     toggle.addEventListener('click', function (e) {
+      e.preventDefault();
       e.stopPropagation();
       setOpen(drop.getAttribute('aria-expanded') !== 'true');
     });
-
-    /* Pointer users get hover on desktop; tap/keyboard still works everywhere */
-    if (window.matchMedia('(min-width: 961px)').matches) {
-      drop.addEventListener('mouseenter', function () { setOpen(true); });
-      drop.addEventListener('mouseleave', function () { setOpen(false); });
-    }
 
     drop.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { setOpen(false); toggle.focus(); }
