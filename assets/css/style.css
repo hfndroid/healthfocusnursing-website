@@ -35,7 +35,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;font-size:100%}
 body{
   font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:1.0625rem;line-height:1.75;color:var(--ink);
+  font-size:1rem;line-height:1.7;color:var(--ink);
   background:var(--cream);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
@@ -257,7 +257,7 @@ svg{display:block;flex-shrink:0}
 .hero-copy{padding:44px 0 56px}
 .hero-eyebrow{display:none}
 .hero h1{color:var(--ink);max-width:640px;font-size:clamp(1.875rem,1.3rem + 2.4vw,3rem)}
-.hero .sub{color:var(--ink-m);font-size:1.15625rem;line-height:1.7;max-width:500px;margin-top:18px}
+.hero .sub{color:var(--ink-m);font-size:1.0625rem;max-width:480px;margin-top:18px}
 .hero .cta-row{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
 .hero .trust-row{margin-top:34px}
 .hero-photo{position:relative;background:var(--sand);min-height:320px;display:flex;align-items:center;justify-content:center;color:var(--ink-l);font-size:0.8125rem;text-align:center;padding:24px}
@@ -611,7 +611,7 @@ svg{display:block;flex-shrink:0}
 .prose{max-width:760px;margin:0 auto}
 .prose h2{margin:40px 0 16px}
 .prose h2:first-child{margin-top:0}
-.prose p{margin-bottom:20px;color:var(--ink-m);font-size:1.09375rem;line-height:1.8}
+.prose p{margin-bottom:18px;color:var(--ink-m);font-size:1.0312rem}
 .blog-meta{color:var(--ink-l);font-size:0.875rem;margin-bottom:26px}
 .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
 .blog-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;transition:box-shadow .25s,transform .25s}
@@ -899,3 +899,25 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 .start-links a:hover{border-color:var(--green-d);background:var(--green-l);color:var(--green-d);transform:translateY(-1px)}
 .start-links a svg{width:15px;height:15px;stroke:currentColor}
 @media (max-width:560px){.start-links a{width:100%;justify-content:space-between}}
+
+
+/* ============================================================
+   COLLAPSIBLE SUBURB LISTS (mobile)
+   Desktop shows every suburb. On phones, the first 12 show with a
+   "Show all" button, so search stays the obvious first move and the
+   page is not a long wall of chips. Typing in the search box always
+   reveals every match regardless.
+   ============================================================ */
+.show-all-chips{
+  display:none;align-items:center;gap:8px;min-height:44px;margin-top:14px;
+  padding:10px 18px;border-radius:999px;border:1.5px solid var(--border);background:#fff;
+  font-size:0.9375rem;font-weight:600;color:var(--purple);
+}
+.show-all-chips:hover{border-color:var(--purple);background:var(--purple-l)}
+.show-all-chips svg{width:14px;height:14px;transition:transform .2s ease}
+.show-all-chips[aria-expanded="true"] svg{transform:rotate(180deg)}
+@media (max-width:760px){
+  .chip-grid.collapsible:not(.expanded):not(.searching) > .chip:nth-child(n+13){display:none}
+  .show-all-chips{display:inline-flex}
+  .chip-grid.searching + .show-all-chips{display:none}
+}
