@@ -921,3 +921,16 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
   .show-all-chips{display:inline-flex}
   .chip-grid.searching + .show-all-chips{display:none}
 }
+
+/* ============================================================
+   SITE IMAGES
+   Each image fills its frame at the frame's own aspect ratio, so
+   layout never shifts while images load. A soft tint shows in the
+   frame for the split second before the image arrives.
+   ============================================================ */
+.ph-img{
+  display:block;width:100%;height:auto;object-fit:cover;object-position:center;
+  aspect-ratio:4/3;border-radius:36px;background:var(--purple-l);
+}
+.hero-photo-wrap .ph-img{aspect-ratio:4/3;border-radius:0}
+.about-img-wrap .ph-img{aspect-ratio:4/5;border-radius:0}
