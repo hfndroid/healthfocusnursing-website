@@ -990,3 +990,25 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 .hub-card p{color:var(--ink-l);font-size:0.9375rem;flex:1}
 .hub-card .more{margin-top:16px;font-weight:700;color:var(--purple)}
 @media (max-width:900px){.hub-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   ICON SET
+   Traced artwork: both layers are filled paths using the even-odd
+   rule, so interior detail reads as holes. The pale mass is centred
+   and wraps the outline evenly. Green marks clinical services,
+   purple marks support services.
+   ============================================================ */
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.hfn-icon{width:40px;height:40px;display:block}
+.hfn-icon .mass{fill:#E3D0EF;fill-rule:evenodd;stroke:none}
+.hfn-icon .line{fill:var(--purple);fill-rule:evenodd;stroke:none}
+.hfn-icon.clinical .mass{fill:#D9E9BF}
+.hfn-icon.clinical .line{fill:var(--green-d)}
+.hfn-icon.sm{width:26px;height:26px}
+
+/* Service cards carry the icon directly now, with no tinted circle */
+.svc-card .hfn-icon{margin-bottom:16px}
+
+/* High-contrast mode: drop the pale mass so only the outline remains */
+html[data-a11y-contrast="high"] .hfn-icon .mass{display:none}
+html[data-a11y-contrast="high"] .hfn-icon .line{fill:var(--ink)}
