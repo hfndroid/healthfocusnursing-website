@@ -1040,3 +1040,12 @@ html[data-a11y-contrast="high"] .hfn-icon .line{fill:var(--ink)}
 /* NDIS badge sitting with the credentials list */
 .cred-badge{margin-top:22px;background:#fff;padding:12px 16px;border-radius:var(--radius);
   border:1px solid var(--border);width:172px;height:auto;display:block}
+
+/* Optical size correction: the coordinator icon (document handed between two
+   hands) is a wide, short shape that only fills 60% of its square viewBox,
+   versus 74-86% for the other three router icons. Rather than distort its
+   proportions to force a square fill, nudge its rendered size up slightly
+   so it reads as the same visual weight as its neighbours. */
+.hfn-icon:has(> use[href="#o-role-coordinator"]){
+  transform:scale(1.18);
+}
