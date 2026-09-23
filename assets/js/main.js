@@ -127,12 +127,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ---------- Suburb chip click result ---------- */
+  /* Every suburb chip leads somewhere: it confirms coverage, fills the
+     suburb into every enquiry form on the page, and links to the form. */
   document.querySelectorAll('.chip[data-suburb-result]').forEach(function (chip) {
     chip.addEventListener('click', function (e) {
       var resultBox = document.querySelector('.suburb-result');
       if (!resultBox) return;
       e.preventDefault();
-      resultBox.textContent = 'We service ' + chip.getAttribute('data-suburb-result') + '. Enquire below to get started.';
+      var suburb = chip.getAttribute('data-suburb-result');
+      var form = document.querySelector('#enquire, #book');
+      document.querySelectorAll('input[name="suburb"]').forEach(function (input) { input.value = suburb; });
+      resultBox.textContent = '';
+      resultBox.appendChild(document.createTextNode('Yes, we visit ' + suburb + '. '));
+      var link = document.createElement('a');
+      link.href = form ? '#' + form.id : '/contact.html';
+      link.textContent = 'Book a visit in ' + suburb;
+      resultBox.appendChild(link);
       resultBox.classList.add('show');
       resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
