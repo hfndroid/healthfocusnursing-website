@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=f91761fc">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -480,11 +480,32 @@
       <div class="testi-person"><div class="avatar purple">H</div><div><strong>Hazel McNicholl</strong><span>Google review</span></div></div>
     </blockquote>
 
-    <!-- Elfsight Google Reviews: live rating, live count, and its own
-         "write a review" link, so nothing static is duplicated beside it. -->
-    <div class="reveal">
-      <script src="https://elfsightcdn.com/platform.js" async></script>
-      <div class="elfsight-app-c0d8de3b-8e56-403e-97df-364f843d5c1d" data-elfsight-app-lazy></div>
+    <!-- ================================================================
+         MANUAL REVIEWS — curated, not a live third-party feed.
+
+         Decided against Elfsight: it showed Hazel's review a second time
+         (Elfsight pulls it independently from Google, duplicating the
+         featured quote above) and its default card styling didn't match
+         the rest of the site as well as this hand-built version does.
+
+         TO ADD A NEW REVIEW: copy one <div class="testi-simple">...</div>
+         block below, change the quote text, the avatar letter and colour
+         (purple / teal / green — cycle through them), the name and the
+         role. Then run ./build_all.sh from the build/ folder and push.
+         That's the whole process — no login, no dashboard, no API.
+
+         Keep every review non-clinical (about kindness, reliability,
+         communication) rather than about treatment outcomes — see the
+         comment on the featured Hazel quote above for why.
+         ================================================================ -->
+    <!-- No second review yet. When you have another genuine one, delete
+         this comment and add a testi-grid-single-reveal wrapper block
+         containing one testi-simple card per review -- see the
+         instructions in the comment above this one for the exact markup
+         to copy. -->
+
+    <div class="testi-cta reveal">
+      <a href="https://g.page/r/CXD6v4VXQ6FMEBM/review" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Leave us a Google review</a>
     </div>
   </div>
 </section>
