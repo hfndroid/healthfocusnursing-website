@@ -841,15 +841,24 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 .testi-grid.single{grid-template-columns:1fr;max-width:640px}
 
 /* Review invitation (stands in until live Google reviews are connected) */
-.review-invite{
-  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
-  background:var(--green-l);border:1px solid rgba(77,115,24,.18);border-radius:var(--radius-xl);
-  padding:40px 44px;
+/* review-invite / review-copy: retired along with the Cloudflare reviews
+   function once the Elfsight widget took over this job. */
+
+/* Elfsight Google Reviews widget: match the site's font and the soft,
+   large-radius card style used elsewhere on the page. Elfsight typically
+   renders in its own iframe, so this only takes effect once the same font
+   is also set inside Elfsight's own editor (or loaded there directly) --
+   this stylesheet cannot reach inside a separate document's iframe. */
+.eapps-google-reviews,
+.eapps-google-reviews *{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif !important;
 }
-.review-copy{max-width:600px}
-.review-copy h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem)}
-.review-copy p{color:var(--ink-m);margin-top:10px}
-@media (max-width:700px){.review-invite{padding:28px 24px}}
+.eapps-google-reviews .eapps-review,
+.eapps-review-item,
+.eapps-widget-toolbar{
+  border-radius:20px !important;
+  box-shadow:0 2px 8px rgba(0,0,0,.06) !important;
+}
 
 
 /* ============================================================
@@ -885,8 +894,8 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 .bg-green-soft{background:var(--green-l)}
 .bg-green-soft .about-list{border-top-color:rgba(77,115,24,.18)}
 .bg-green-soft .about-list li{border-bottom-color:rgba(77,115,24,.18)}
-.how-section{background:var(--green-l) !important}
-.how-section .step-num{background:var(--green-d) !important;color:#fff}
+/* Reverted to sand: green was appearing here, in About, and in the review
+   panel below, three in a row. It now appears once, in About only. */
 
 /* ============================================================
    "WHERE WOULD YOU LIKE TO START?" SHORTCUTS
