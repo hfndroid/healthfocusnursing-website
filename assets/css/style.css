@@ -1018,6 +1018,8 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
 .hfn-icon.role .mass{fill:#E3D0EF}
 .hfn-icon.role .line{fill:var(--purple)}
 .hfn-icon.role.md{width:26px;height:26px}
+.hfn-icon.trust .mass{fill:#E3D0EF}
+.hfn-icon.trust .line{fill:var(--purple)}
 
 /* Service cards carry the icon directly now, with no tinted circle */
 .svc-card .hfn-icon{margin-bottom:16px}
