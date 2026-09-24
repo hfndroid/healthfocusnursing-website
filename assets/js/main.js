@@ -5,6 +5,20 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ---------- Bot-timing flag ----------
+     A genuine person needs at least a few seconds to read a form and
+     type into it; a scripted bot typically fills and submits one in
+     under a second. This flags (never blocks) suspiciously fast
+     submissions, so a fast-but-real human using autofill is never
+     wrongly rejected -- the flag just shows up in your inbox for you
+     to judge, alongside Formspree's own spam protection. */
+  var PAGE_LOAD_TIME = Date.now();
+  function addTimingField(data) {
+    var seconds = Math.round((Date.now() - PAGE_LOAD_TIME) / 1000);
+    data.append('seconds_on_page', String(seconds));
+    if (seconds < 3) data.append('_possible_bot', 'submitted in under 3 seconds');
+  }
+
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.querySelector('.nav-toggle');
   var navLinks = document.querySelector('.nav-links');
@@ -164,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var data = new FormData(form);
+      addTimingField(data);
       var success = form.querySelector('.form-success');
       var body = form.querySelector('.form-body');
       var submitBtn = form.querySelector('button[type="submit"]');
@@ -187,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var data = new FormData(form);
+      addTimingField(data);
       var success = form.querySelector('.form-success');
       var body = form.querySelector('.form-body');
       var submitBtn = form.querySelector('button[type="submit"]');
