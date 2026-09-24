@@ -607,6 +607,12 @@ svg{display:block;flex-shrink:0}
 @media (max-width:520px){.contact-cards{grid-template-columns:1fr}}
 .map-embed{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);margin-top:20px}
 .map-embed iframe{width:100%;height:360px;border:0;display:block}
+@media (max-width:700px){
+  /* Wider zoom (to show the whole service-area boundary) means a narrow
+     phone screen sees less east-west ground than desktop at the same
+     zoom level. A bit more height keeps more of the boundary visible. */
+  .map-embed iframe{height:440px}
+}
 .urgent-box{background:var(--purple-l);border-radius:var(--radius-lg);padding:24px 28px;margin-top:32px;font-size:0.9375rem}
 .urgent-box strong{color:var(--purple-d)}
 
