@@ -835,7 +835,6 @@ html[data-a11y-motion="off"] .reveal-r{opacity:1 !important;transform:none !impo
   .drop-menu a:hover{background:none}
   .drop-menu .divider-line{display:none}
 }
-}
 
 /* Single testimonial below the featured quote */
 .testi-grid.single{grid-template-columns:1fr;max-width:640px}
