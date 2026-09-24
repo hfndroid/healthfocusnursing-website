@@ -86,28 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Long suburb lists: collapse on mobile ----------
-     On small screens, lists longer than 12 suburbs show the first 12 plus
-     a "Show all" button. Desktop always shows everything (CSS hides the
-     button there). Searching bypasses the collapse so every match shows. */
-  var CHIP_LIMIT = 12;
-  document.querySelectorAll('.chip-grid').forEach(function (grid) {
-    var total = grid.querySelectorAll('.chip').length;
-    if (total <= CHIP_LIMIT) return;
-    grid.classList.add('is-collapsed');
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'chip-toggle';
-    btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = 'Show all ' + total + ' suburbs';
-    grid.insertAdjacentElement('afterend', btn);
-    btn.addEventListener('click', function () {
-      var collapsed = grid.classList.toggle('is-collapsed');
-      btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      btn.textContent = collapsed ? 'Show all ' + total + ' suburbs' : 'Show fewer suburbs';
-    });
-  });
-
   /* ---------- Suburb search filter ---------- */
   var suburbSearch = document.querySelector('.suburb-search input');
   if (suburbSearch) {
@@ -115,9 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var val = suburbSearch.value.trim().toLowerCase();
       document.querySelectorAll('.chip-grid.collapsible').forEach(function (g) {
         g.classList.toggle('searching', val.length > 0);
-      });
-      document.querySelectorAll('.chip-grid').forEach(function (grid) {
-        grid.classList.toggle('is-searching', val.length > 0);
       });
       document.querySelectorAll('.chip-grid .chip').forEach(function (chip) {
         var text = chip.textContent.trim().toLowerCase();
