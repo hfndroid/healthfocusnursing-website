@@ -290,6 +290,7 @@ svg{display:block;flex-shrink:0}
 .choice-btn.selected{border-color:var(--purple);background:var(--purple-l);color:var(--purple)}
 .field-group{margin-bottom:14px}
 .field-group label{display:block;font-size:0.8438rem;font-weight:600;margin-bottom:6px;color:var(--ink-m)}
+.field-group-label{display:block;font-size:0.8438rem;font-weight:600;margin-bottom:8px;color:var(--ink-m)}
 .field-group input,.field-group select,.field-group textarea{
   width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:0.9375rem;
   background:var(--cream);transition:border-color .2s;
