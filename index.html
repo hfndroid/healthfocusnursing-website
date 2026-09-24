@@ -406,8 +406,9 @@
             <div class="field-group"><label for="m-suburb">Your suburb</label><input type="text" id="m-suburb" name="suburb" required></div>
             <div class="field-group">
               <label for="m-need">Support needed</label>
-              <select id="m-need" name="service_needed">
-                <option>NDIS Continence Assessment</option><option>Community Nursing</option><option>Personal and Self-care</option><option>Dementia Care and Support</option><option>Not sure yet</option>
+              <select id="m-need" name="service_needed" required>
+                <option value="" disabled selected hidden>Choose one</option>
+                <option>NDIS Continence Assessment</option><option>Community Nursing</option><option>Personal and Self-care</option><option>Dementia Care and Support</option><option>High Intensity Supports</option><option>Not sure yet</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary"><span class="btn-label">Send</span><span class="spinner"></span></button>
@@ -624,12 +625,13 @@
               <div class="field-group"><label for="b-name">Full name</label><input type="text" id="b-name" name="name" required></div>
               <div class="field-row2">
                 <div class="field-group"><label for="b-phone">Phone number</label><input type="tel" id="b-phone" name="phone" required></div>
-                <div class="field-group"><label for="b-suburb">Suburb</label><input type="text" id="b-suburb" name="suburb"></div>
+                <div class="field-group"><label for="b-suburb">Suburb</label><input type="text" id="b-suburb" name="suburb" required></div>
               </div>
               <div class="field-group">
                 <label for="b-service">Service needed</label>
-                <select id="b-service" name="service_needed">
-                  <option>NDIS Continence Assessment</option><option>Community Nursing</option><option>Personal and Self-care</option><option>Dementia Care and Support</option><option>Not sure yet</option>
+                <select id="b-service" name="service_needed" required>
+                  <option value="" disabled selected hidden>Choose one</option>
+                  <option>NDIS Continence Assessment</option><option>Community Nursing</option><option>Personal and Self-care</option><option>Dementia Care and Support</option><option>High Intensity Supports</option><option>Not sure yet</option>
                 </select>
               </div>
               <div class="field-group"><label for="b-msg">Message (optional)</label><textarea id="b-msg" name="message"></textarea></div>
