@@ -702,6 +702,7 @@ svg{display:block;flex-shrink:0}
   font-size:0.8125rem;font-weight:700;color:var(--ink-m);background:#fff;
 }
 .a11y-opt button[aria-pressed="true"]{background:var(--purple);border-color:var(--purple);color:#fff}
+.a11y-speak{padding:0 12px}
 .a11y-reset{margin-top:12px;font-size:0.8125rem;font-weight:600;color:var(--ink-l);text-decoration:underline;min-height:34px}
 
 /* Applied preference states */
