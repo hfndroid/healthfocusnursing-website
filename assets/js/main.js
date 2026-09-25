@@ -329,6 +329,38 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    /* ---------- Read this page aloud ----------
+       Reads the page's main content using the browser's own speech
+       engine (no third-party service). If the browser doesn't support
+       it, the button is hidden rather than shown broken. */
+    var speakBtn = panel.querySelector('.a11y-speak');
+    if (speakBtn) {
+      if (!('speechSynthesis' in window)) {
+        speakBtn.closest('.a11y-row').style.display = 'none';
+      } else {
+        speakBtn.addEventListener('click', function () {
+          if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            speakBtn.textContent = 'Start';
+            speakBtn.setAttribute('aria-pressed', 'false');
+            return;
+          }
+          var main = document.getElementById('main-content');
+          if (!main) return;
+          var utterance = new SpeechSynthesisUtterance(main.innerText);
+          utterance.rate = 0.95;
+          utterance.onend = function () {
+            speakBtn.textContent = 'Start';
+            speakBtn.setAttribute('aria-pressed', 'false');
+          };
+          utterance.onerror = utterance.onend;
+          window.speechSynthesis.speak(utterance);
+          speakBtn.textContent = 'Stop';
+          speakBtn.setAttribute('aria-pressed', 'true');
+        });
+      }
+    }
+
     document.addEventListener('click', function (e) {
       if (!panel.contains(e.target) && !btn.contains(e.target)) {
         panel.classList.remove('open');
