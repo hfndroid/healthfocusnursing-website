@@ -703,6 +703,9 @@ svg{display:block;flex-shrink:0}
 }
 .a11y-opt button[aria-pressed="true"]{background:var(--purple);border-color:var(--purple);color:#fff}
 .a11y-speak{padding:0 12px}
+
+/* Zero-friction reassurance microcopy, placed beside the two main CTAs */
+.cta-note{font-size:0.8438rem;color:var(--ink-l);margin-top:10px}
 .a11y-reset{margin-top:12px;font-size:0.8125rem;font-weight:600;color:var(--ink-l);text-decoration:underline;min-height:34px}
 
 /* Applied preference states */
