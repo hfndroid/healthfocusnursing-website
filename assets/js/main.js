@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function addTimingField(data) {
     var seconds = Math.round((Date.now() - PAGE_LOAD_TIME) / 1000);
     data.append('seconds_on_page', String(seconds));
-    if (seconds < 3) data.append('_possible_bot', 'submitted in under 3 seconds');
+    /* No leading underscore: Formspree reserves those for its own settings
+       and may drop an unrecognised one, which would hide this flag. */
+    if (seconds < 3) data.append('possible_bot', 'submitted in under 3 seconds');
+    /* Which page the form was sent from, on every form, in one place. */
+    data.append('source_page', window.location.pathname);
   }
 
   /* ---------- Mobile nav toggle ---------- */
